@@ -2,6 +2,7 @@
 # bounce.py
 #
 # Author: Chris Lee
+# Date: April 25, 2022
 # Exercise 1.5
 
 import argparse
