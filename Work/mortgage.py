@@ -1,5 +1,7 @@
 # mortgage.py
 #
+# Author: Chris Lee
+# Date: April 25, 2022
 # Exercise 1.7
 
 import argparse
