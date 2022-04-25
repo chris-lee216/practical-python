@@ -10,7 +10,7 @@ import argparse
 def get_args():
     """Get command line args"""
     parser = argparse.ArgumentParser(
-        description="Mortgage Calculator", formatter_class=ArgumentDefaultsHelpFormatter
+        description="Mortgage Calculator", formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
 
     parser.add_argument(
