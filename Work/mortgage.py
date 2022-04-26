@@ -59,12 +59,15 @@ def calc_payment(principal, rate, payment, extra_payment, start, end):
             total_paid = total_paid + payment
         print(f"{month} ${total_paid:,.2f} ${principal:,.2f}")
         month += 1
+    print(f"Total paid: ${total_paid:,.2f}")
+    print(f"Months: {month}")
 
 
 # ----------------------------------------------------------------------------------------
 
 
 def main():
+    """It starts here..."""
     args = get_args()
     principal = args.principal
     rate = args.rate / 100
