@@ -49,9 +49,9 @@ def get_args():
 def calc_payment(principal, rate, payment, extra_payment, start, end):
     """calculate monthly payments"""
     total_paid = 0.0
-    month = start
+    month = 1
     while principal > 0:
-        if month < end:
+        if month >= start and month < end:
             principal = principal * (1 + rate / 12) - (payment + extra_payment)
             total_paid = total_paid + payment + extra_payment
         else:
