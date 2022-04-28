@@ -6,6 +6,7 @@
 
 import csv
 
+
 def portfolio_cost(path):
     """Return the cost of a portfolio"""
     total_cost = 0
@@ -16,6 +17,7 @@ def portfolio_cost(path):
             price = float(row.get("price"))
             total_cost += shares * price
     return total_cost
+
 
 # ----------------------------------------------------------------------------------------
 def main():
