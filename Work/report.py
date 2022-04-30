@@ -12,11 +12,15 @@ def portfolio_cost(file_path):
     total_cost = 0
     with open(file_path, newline="") as csvfile:
         reader = csv.DictReader(csvfile)
-        for row in reader:
-            names = int(row.get("names"))
-            price = float(row.get("price"))
-            total_cost += names * price
-    return total_cost
+        # for row in reader:
+        portfolio = {
+            row.get("name"): {"shares": row.get("shares"), "price": row.get("price")}
+            for row in reader
+        }
+        # names = int(row.get("names"))
+        # price = float(row.get("price"))
+        # total_cost += names * price
+    return portfolio
 
 
 # ----------------------------------------------------------------------------------------
