@@ -14,7 +14,10 @@ def portfolio_cost(file_path):
         reader = csv.DictReader(csvfile)
         # for row in reader:
         portfolio = {
-            row.get("name"): {"shares": row.get("shares"), "price": row.get("price")}
+            row.get("name"): {
+                "shares": row.get("shares"),
+                "price": float(row.get("price")),
+            }
             for row in reader
         }
         # names = int(row.get("names"))
@@ -35,9 +38,21 @@ def read_prices(file_path):
 # ----------------------------------------------------------------------------------------
 def main():
     """It starts here"""
-    file_path = "Data/prices.csv"
-    # total_cost = portfolio_cost(file_path)
-    # print(f"Total cost: ${total_cost:,.2f}")
+    portfolio_path = "Data/portfolio.csv"
+    prices_path = "Data/prices.csv"
+    portfolio = portfolio_cost(portfolio_path)
+    stock_prices = read_prices(prices_path)
+    # print(portfolio)
+    # print(stock_prices)
+
+    print(f"Name-|-Purchase Price-|-Current Price")
+    print(f"----------------------------------")
+    for row in portfolio:
+        purchase_price = portfolio[row]["price"]
+        current_price = stock_prices[row]
+
+        print(f"{row} ${purchase_price:,.2f} {current_price:,.2f}")
+    # print(f"Total cost: ${total_cost:.,2f}")
 
 
 if __name__ == "__main__":
