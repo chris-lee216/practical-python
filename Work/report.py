@@ -7,24 +7,33 @@
 import csv
 
 
-def portfolio_cost(path):
+def portfolio_cost(file_path):
     """Return the cost of a portfolio"""
     total_cost = 0
-    with open(path, newline="") as csvfile:
+    with open(file_path, newline="") as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            shares = int(row.get("shares"))
+            names = int(row.get("names"))
             price = float(row.get("price"))
-            total_cost += shares * price
+            total_cost += names * price
     return total_cost
+
+
+# ----------------------------------------------------------------------------------------
+def read_prices(file_path):
+    """read stock prices from csv into dictionary"""
+    with open(file_path, newline="") as csvfile:
+        reader = csv.DictReader(csvfile, fieldnames=["name", "price"])
+        stock_prices = {row.get("name"): float(row.get("price")) for row in reader}
+    return stock_prices
 
 
 # ----------------------------------------------------------------------------------------
 def main():
     """It starts here"""
-    path = "Data/portfolio.csv"
-    total_cost = portfolio_cost(path)
-    print(f"Total cost: ${total_cost:,.2f}")
+    file_path = "Data/prices.csv"
+    # total_cost = portfolio_cost(file_path)
+    # print(f"Total cost: ${total_cost:,.2f}")
 
 
 if __name__ == "__main__":
