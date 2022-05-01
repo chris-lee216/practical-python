@@ -15,14 +15,11 @@ def portfolio_cost(file_path):
         # for row in reader:
         portfolio = {
             row.get("name"): {
-                "shares": row.get("shares"),
+                "shares": int(row.get("shares")),
                 "price": float(row.get("price")),
             }
             for row in reader
         }
-        # names = int(row.get("names"))
-        # price = float(row.get("price"))
-        # total_cost += names * price
     return portfolio
 
 
@@ -36,23 +33,45 @@ def read_prices(file_path):
 
 
 # ----------------------------------------------------------------------------------------
+def make_report(portfolio, stock_prices):
+    """generate report"""
+    report_data = []
+    # this could be done using a list comprehension, but readability would be sacrificed.
+    for row in portfolio:
+        current_price = stock_prices[row]
+        purchase_price = portfolio[row]["price"]
+        change = current_price - purchase_price
+        shares = portfolio[row]["shares"]
+        report_data.append((row, shares, current_price, change))
+    return report_data
+
+
+# ----------------------------------------------------------------------------------------
+def print_report(report_data):
+    """Print report using the list of tuples"""
+    headers = ("Name", "Shares", "Price", "Change")
+    lines = "---------- ---------- ---------- -----------"
+    print(
+        "{:>10} {:>10} {:>10} {:>10}".format(
+            headers[0], headers[1], headers[2], headers[3]
+        )
+    )
+    print("{:>10}".format(lines))
+    dollar = "$"
+    for name, shares, price, change in report_data:
+        print(f"{name:>10s} {shares:>10d} {price:10.2f} {change:>10.2f}")
+
+
+# ----------------------------------------------------------------------------------------
 def main():
     """It starts here"""
     portfolio_path = "Data/portfolio.csv"
     prices_path = "Data/prices.csv"
     portfolio = portfolio_cost(portfolio_path)
     stock_prices = read_prices(prices_path)
-    # print(portfolio)
-    # print(stock_prices)
 
-    print(f"Name-|-Purchase Price-|-Current Price-|-Difference")
-    print(f"----------------------------------")
-    for row in portfolio:
-        purchase_price = portfolio[row]["price"]
-        current_price = stock_prices[row]
-        difference =  current_price - purchase_price
-        print(f"{row} ${purchase_price:,.2f} {current_price:,.2f} ${difference:,.2f}")
-    # print(f"Total cost: ${total_cost:.,2f}")
+    report_data = make_report(portfolio, stock_prices)
+    print_report(report_data)
 
 
 if __name__ == "__main__":
