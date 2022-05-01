@@ -45,13 +45,13 @@ def main():
     # print(portfolio)
     # print(stock_prices)
 
-    print(f"Name-|-Purchase Price-|-Current Price")
+    print(f"Name-|-Purchase Price-|-Current Price-|-Difference")
     print(f"----------------------------------")
     for row in portfolio:
         purchase_price = portfolio[row]["price"]
         current_price = stock_prices[row]
-
-        print(f"{row} ${purchase_price:,.2f} {current_price:,.2f}")
+        difference =  current_price - purchase_price
+        print(f"{row} ${purchase_price:,.2f} {current_price:,.2f} ${difference:,.2f}")
     # print(f"Total cost: ${total_cost:.,2f}")
 
 
